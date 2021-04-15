@@ -24,17 +24,9 @@ function(request) {
                                            menuItem(tabName = 'Tab2','Search Movies',
                                                     icon = icon('film')),
                                            
-                                           menuItem(tabName = 'Tab3','Diagrams',
-                                                    icon = icon('chart-bar'),
-                                                    menuSubItem(tabName = 'Tab31',
-                                                                'Rating Resulats',
-                                                                icon = icon('poll-h')),
-                                                    menuSubItem(tabName = 'Tab32',
-                                                                'Number of Voting',
-                                                                icon = icon('slack-hash'))),
+                                           menuItem(tabName = 'Tab3','Movies By Year',
+                                                    icon = icon('chart-bar'))
                                            
-                                           menuItem(tabName = 'Tab4','Artist Lovers',
-                                                    icon = icon('grin-hearts'))
               ))
               
               ##-------------------------------3-Body-------------------------------------
@@ -63,9 +55,15 @@ function(request) {
                         ),
                         DT::dataTableOutput("searchResults")
                      )),
-             tabItem(tabName = 'Tab31'),
-             tabItem(tabName = 'Tab32'),
-             tabItem(tabName = 'Tab4')
+             tabItem(tabName = 'Tab3',
+                     fluidPage(
+                       div(style="display:inline-block;vertical-align:top;",
+                           fluidRow(
+                             column(8,sliderInput("yearSlider", label = h3("Year Slider"), min = 1900,max = 2021, value = c(1990, 2021))),
+                           )
+                       ),
+                       plotOutput("moviesByYearPlot")  
+                     ))
     )
   )
 

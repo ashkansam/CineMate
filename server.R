@@ -1,6 +1,7 @@
 library(shinybusy)
 library(tidyverse)
-
+library(sqldf)
+library(ggplot2)
 
 server <- function(input, output) {
   
@@ -23,17 +24,22 @@ server <- function(input, output) {
     }))
   })
   
-  
+  output$moviesByYearPlot <- renderPlot({
+    
+    df <- sqldf(paste("SELECT COUNT(tconst) as count, startYear as year FROM movies 
+                  WHERE startYear>=",input$yearSlider[1]," AND startYear<=",input$yearSlider[2]," GROUP BY startYear"));
+    for (row in 1:nrow(df)) {
+      df[row, "count"] <- as.numeric(df[row, "count"])
+      df[row, "year"]  <- as.numeric(df[row, "year"])
+    }
+    ggplot(df, aes(x=count, y=year)) + geom_bar(stat="identity") + 
+      labs(y="Year", x="Number of Movies")
+    
+  })
   
   show_spinner()
   movies <- read.csv(file = 'data/Movie-Titles.csv')
-  artists <- read.csv(file = 'data/Artist-Names.csv')
-  dirsAndWrts <- read.csv(file = 'data/Movie-Directors-and-Writers.csv')
-  ratings <- read.csv(file = 'data/Title-Ratings.csv')
+  
   hide_spinner()
-  print(head(movies))
-  print(head(artists))
-  print(head(dirsAndWrts))
-  print(head(ratings))
-  print('files read')
+  
 }
