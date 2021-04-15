@@ -2,6 +2,7 @@
 library(shinydashboard)
 library(shinythemes)
 library(shinybusy)
+library(DT)
 
 function(request) {
   
@@ -56,11 +57,11 @@ function(request) {
                      fluidPage(
                        div(style="display:inline-block;vertical-align:top;",
                            fluidRow(
-                             column(8,textInput("query", "Search", placeholder = "Search by name, genres, people, year")),
+                             column(8,textInput("query", "Search", placeholder = "Search by name, genres, year")),
                              column(4,br(),actionButton("searchButton", "Search"))
                            )
                         ),
-                        verbatimTextOutput("value")
+                        DT::dataTableOutput("searchResults")
                      )),
              tabItem(tabName = 'Tab31'),
              tabItem(tabName = 'Tab32'),
