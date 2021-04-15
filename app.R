@@ -43,7 +43,22 @@ ui = dashboardPage(skin = 'yellow',
     
     ##-------------------------------3-Body-------------------------------------
     dashboardBody(
-        tabItems(tabItem(tabName = 'Tab1'),
+        tabItems(tabItem(tabName = 'Tab1',h1('CineMate is your Cinema-mate!'),
+                                          h2('Welcome to CineMate.'),
+                                          h3('CineMate is here to make an easy
+                                             and enjoyable experience of searching
+                                             about movies, directors, writers, actors, etc.'),
+                                          h3('Do you want to know important details about
+                                             your favorite movies?'),
+                                          h3('Do you want to know what others think about
+                                             a specific movie?'),
+                                          h3('What are you fascinated by in this magical world?'),
+                                          h3('CineMate is ready to tell you everything!' ),
+                                          img(src='1.jpg'),img(src='2.jpg')
+                         
+                         
+                             ),
+                 
                  tabItem(tabName = 'Tab2'),
                  tabItem(tabName = 'Tab31'),
                  tabItem(tabName = 'Tab32'),
